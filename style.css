@@ -8,8 +8,20 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+.page {
+  /* 垂直排列 + 水平置中 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 
+  /* 避開底部鵝毛筆 */
+  padding-bottom: 120px;
+}
 /* 翻牌容器 */
 .card {
   width: 180px;
