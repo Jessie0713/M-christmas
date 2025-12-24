@@ -159,32 +159,42 @@ body {
   gap: 18px;
   width: min(960px, 92vw);
   margin: 0 auto;
-  grid-template-columns: repeat(2, 1fr); /* 手機預設 2 欄 */
-  z-index: 1;
+
+  /* ✅ 360px 以上：兩欄固定寬度，整體置中 */
+  grid-template-columns: repeat(2, 160px);
+  justify-content: center; /* ✅ 關鍵：整個 grid 置中 */
   justify-items: center;
   align-items: center;
+
+  z-index: 1;
+}
+
+/* ✅ 卡片不要固定 180，讓它跟欄寬走 */
+.card {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1; /* 保持正方形 */
+  max-width: 160px; /* 跟欄寬一致 */
+  justify-self: center;
 }
 
 /* 平板：3 欄 */
 @media (min-width: 768px) {
   .grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 180px);
+  }
+  .card {
+    max-width: 180px;
   }
 }
 
 /* 電腦：4 欄 */
 @media (min-width: 1024px) {
   .grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 180px);
   }
 }
 
-/* 讓 card 在 grid 內置中、尺寸固定 */
-.card {
-  width: 180px; /* 你原本的大小 */
-  height: 180px;
-  justify-self: center; /* 每格置中 */
-}
 /* 底部固定兩支鵝毛筆 */
 .quills {
   position: fixed;
