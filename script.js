@@ -33,20 +33,22 @@ const letterTextEl = document.getElementById('letterText')
 const cursorEl = document.getElementById('letterCursor')
 
 let timer = null
-
+const letterATopic = 'A Letter from Jessie'
+const letterBTopic = 'A Letter from Kai'
 const letterA =
-  'Dear you,\n\nMerry Christmas 🎄\nThanks for being part of this year.\n\nLove,\nMe'
-const letterB =
-  'Hi!\n\nClicking this quill opens another letter.\nWishing you warm days and soft snow ❄️'
+  'Thanks for being a part of my life. I’m really grateful to know you and to have shared so many fun moments together.I hope everything is going well for you, that many wonderful things keep happening in your life.In the future, I hope we’ll have the chance to explore the world together and experience many beautiful moments 😸😸😸. Maybe u can teach me how to play guitar or ride a horse😎Since today is Christmas , take good care of yourself and stay healthy.If you ever come to Taiwan, don’t forget to let me know~~'
 
-function openLetter(content) {
-  // reset
+const letterB =
+  'I’m really happy that I got to know you. I wish you all the best in everything, whether it’s finding an internship, relationships, or traveling. I hope you stay healthy and happy. Since today is Christmas, hope you have a wonderful time with your friends, and I really hope that when we have the chance to visit France in the future, we better meet up and you’re definitely our tour guide 🤣, and don’t forget to take us horse riding at your mom’s stable too! Also, keep the Pingu we gave you hanging on your bag during your travels it’ll be our little companion with you~~, if you ever come back to Taiwan, don’t forget about us. We should definitely travel together in Taiwan again, and eat even more local food and street snacks next time!'
+function openLetter(title, content) {
   if (timer) clearInterval(timer)
-  letterTextEl.textContent = ''
+
+  letterTitle.textContent = title // ✅ 新增：設定標題
+  letterText.textContent = ''
+
   modal.classList.add('open')
   modal.setAttribute('aria-hidden', 'false')
 
-  // typewriter
   let i = 0
   timer = setInterval(() => {
     if (i >= content.length) {
@@ -65,8 +67,8 @@ function closeLetter() {
   modal.setAttribute('aria-hidden', 'true')
 }
 
-quillLeft.addEventListener('click', () => openLetter(letterA))
-quillRight.addEventListener('click', () => openLetter(letterB))
+quillLeft.addEventListener('click', () => openLetter(letterATopic, letterA))
+quillRight.addEventListener('click', () => openLetter(letterBTopic, letterB))
 
 closeBtn.addEventListener('click', closeLetter)
 modal.addEventListener('click', (e) => {
