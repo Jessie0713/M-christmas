@@ -28,6 +28,8 @@ body {
   height: 180px;
   perspective: 1000px;
   cursor: pointer;
+  justify-self: center;
+  align-self: center;
 }
 
 /* 內層要能定位 front/back */
@@ -155,6 +157,8 @@ body {
   margin: 0 auto;
   grid-template-columns: repeat(2, 1fr); /* 手機預設 2 欄 */
   z-index: 1;
+  justify-items: center;
+  align-items: center;
 }
 
 /* 平板：3 欄 */
