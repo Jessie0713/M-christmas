@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Memories</title>
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet">
+
+  </head>
+
+  <body>
+    <div id="snow-container"></div>
+    <h1 class="title">Merry Christmas</h1>
+    <p class="subtitle">Click the fruits and pen to reveal memories ❄️</p>
+
+    <div class="grid">
+      <div class="card" onclick="flip(this)">
+        <div class="inner">
+          <div class="front">
+            <img src="./images/orange.png" alt="apple" />
+          </div>
+          <div class="back">
+            <img src="./images/cover1.jpg" alt="photo1" />
+            <h2>哈哈哈</h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" onclick="flip(this)">
+        <div class="inner">
+          <div class="front">
+            <img src="./images/apple.png" alt="apple" />
+          </div>
+          <div class="back">
+            <img src="./images/cover1.jpg" alt="photo2" />
+          </div>
+        </div>
+      </div>
+      <div class="card" onclick="flip(this)">
+        <div class="inner">
+          <div class="front">
+            <img src="./images/orange.png" alt="apple" />
+          </div>
+          <div class="back">
+            <img src="./images/cover1.jpg" alt="photo1" />
+            <h2>哈哈哈</h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" onclick="flip(this)">
+        <div class="inner">
+          <div class="front">
+            <img src="./images/apple.png" alt="apple" />
+          </div>
+          <div class="back">
+            <img src="./images/cover1.jpg" alt="photo2" />
+          </div>
+        </div>
+      </div>
+      <div class="card" onclick="flip(this)">
+        <div class="inner">
+          <div class="front">
+            <img src="./images/orange.png" alt="apple" />
+          </div>
+          <div class="back">
+            <img src="./images/cover1.jpg" alt="photo1" />
+            <h2>哈哈哈</h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" onclick="flip(this)">
+        <div class="inner">
+          <div class="front">
+            <img src="./images/apple.png" alt="apple" />
+          </div>
+          <div class="back">
+            <img src="./images/cover1.jpg" alt="photo2" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="quills">
+  <button class="quill-btn" id="quillLeft" aria-label="Open letter (left)">
+    <img src="./images/quill-left.png" alt="quill left" />
+  </button>
+  <button class="quill-btn" id="quillRight" aria-label="Open letter (right)">
+    <img src="./images/quill-right.png" alt="quill right" />
+  </button>
+    </div>
+
+<!-- 信紙 modal -->
+<div class="letter-modal" id="letterModal" aria-hidden="true">
+  <div class="letter-card" role="dialog" aria-modal="true" aria-label="Letter">
+    <button class="letter-close" id="letterClose" aria-label="Close">✕</button>
+
+    <h2 class="letter-title">A Letter for You</h2>
+    <div class="letter-paper">
+      <p class="handwriting" id="letterText"></p>
+      <span class="letter-cursor" id="letterCursor"></span>
+    </div>
+  </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

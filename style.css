@@ -1,0 +1,310 @@
+/* 背景先讓你看到東西 */
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)),
+    url('./images/bg-christmas.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+/* 翻牌容器 */
+.card {
+  width: 180px;
+  height: 180px;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+/* 內層要能定位 front/back */
+.inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+/* 翻轉 */
+.card.flipped .inner {
+  transform: rotateY(180deg);
+}
+
+/* front/back 疊在一起 */
+.front,
+.back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+/* 正面（蘋果） */
+.front {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* 背面（照片） */
+.back {
+  transform: rotateY(180deg);
+  background: white;
+}
+
+.front img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.back img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.back h2 {
+  position: absolute;
+  bottom: 10px;
+  left: 12px;
+  margin: 0;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.55);
+  color: white;
+  font-size: 14px;
+}
+
+/* 雪花層 */
+#snow-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.snowflake {
+  position: absolute;
+  top: -10px;
+  color: white;
+  user-select: none;
+  animation-name: fall, sway;
+  animation-timing-function: linear, ease-in-out;
+  animation-iteration-count: infinite, infinite;
+}
+.title {
+  font-family: 'Pacifico', cursive;
+  font-size: clamp(36px, 6vw, 64px);
+  color: rgba(255, 255, 255, 0.9);
+  text-align: center;
+  margin: 24px 8px 0px 8px;
+
+  /* 文字陰影（立體＋溫暖） */
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.55),
+    0 0 18px rgba(255, 255, 255, 0.35);
+}
+
+.subtitle {
+  font-family: 'Pacifico', cursive;
+  font-size: clamp(14px, 3.5vw, 18px);
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  margin-bottom: 24px;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh);
+  }
+}
+@keyframes sway {
+  0% {
+    margin-left: 0px;
+  }
+  50% {
+    margin-left: 30px;
+  }
+  100% {
+    margin-left: 0px;
+  }
+}
+.grid {
+  display: grid;
+  gap: 18px;
+  width: min(960px, 92vw);
+  margin: 0 auto;
+  grid-template-columns: repeat(2, 1fr); /* 手機預設 2 欄 */
+  z-index: 1;
+}
+
+/* 平板：3 欄 */
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* 電腦：4 欄 */
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* 讓 card 在 grid 內置中、尺寸固定 */
+.card {
+  width: 180px; /* 你原本的大小 */
+  height: 180px;
+  justify-self: center; /* 每格置中 */
+}
+/* 底部固定兩支鵝毛筆 */
+.quills {
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: 14px;
+  display: flex;
+  justify-content: space-between;
+  z-index: 50;
+  pointer-events: none; /* 先關掉，讓按鈕自己開啟 */
+}
+
+.quill-btn {
+  pointer-events: auto;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  padding: 6px;
+  filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.35));
+  transition: transform 0.15s ease;
+}
+
+.quill-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+}
+.quill-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.quill-btn img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+}
+
+/* Modal 背景 */
+.letter-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 60;
+  padding: 18px;
+}
+
+.letter-modal.open {
+  display: flex;
+}
+
+/* 信紙卡片 */
+.letter-card {
+  width: min(760px, 94vw);
+  border-radius: 18px;
+  position: relative;
+  padding: 18px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+}
+
+/* 牛皮紙效果（不用圖片版） */
+.letter-paper {
+  border-radius: 14px;
+  padding: 22px 22px 26px;
+  background: radial-gradient(
+      circle at 15% 20%,
+      rgba(255, 255, 255, 0.35),
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 80% 30%,
+      rgba(255, 255, 255, 0.25),
+      transparent 40%
+    ),
+    linear-gradient(180deg, #d9b07a 0%, #c79a62 100%);
+  position: relative;
+}
+
+/* 加一點紙張紋理線（很像信紙） */
+.letter-paper::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.05) 0px,
+    rgba(0, 0, 0, 0.05) 1px,
+    transparent 18px,
+    transparent 24px
+  );
+  mix-blend-mode: multiply;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.letter-title {
+  margin: 0 0 12px;
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+  font-size: 20px;
+}
+
+.letter-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.handwriting {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(22px, 3.6vw, 34px);
+  line-height: 1.55;
+  color: rgba(35, 18, 8, 0.92);
+  margin: 0;
+  position: relative;
+  z-index: 1;
+  white-space: pre-wrap;
+}
+
+.letter-cursor {
+  display: inline-block;
+  width: 10px;
+  height: 26px;
+  margin-left: 4px;
+  background: rgba(35, 18, 8, 0.6);
+  animation: blink 0.8s infinite;
+  vertical-align: -4px;
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
