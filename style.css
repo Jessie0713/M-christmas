@@ -1,26 +1,30 @@
 /* 背景先讓你看到東西 */
+html,
+body {
+  height: auto;
+  background-color: black;
+}
+
 body {
   margin: 0;
-  min-height: 100vh;
+  /* ✅ 允許往下滑 */
+  overflow-y: auto;
+  /* ✅ 只禁止左右溢出 */
+  overflow-x: hidden;
   background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)),
     url('./images/bg-christmas.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 .page {
-  /* 垂直排列 + 水平置中 */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  width: min(960px, 92vw);
+  margin: 0 auto; /* 水平置中 */
   text-align: center;
 
-  /* 避開底部鵝毛筆 */
-  padding-bottom: 120px;
+  /* ✅ 避開底部固定 icon */
+  padding-bottom: 140px;
+  padding-top: 24px;
 }
 /* 翻牌容器 */
 .card {
